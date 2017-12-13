@@ -18,5 +18,5 @@ server.post('/api/messages', connector.listen());
 
 // Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
 var bot = new builder.UniversalBot(connector, function (session) {
-    session.send("So the Vaids Bot says %s back", session.message.text);
+    session.send("first test", session.message.text);
 });
