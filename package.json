@@ -1,0 +1,19 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "A chat bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Obi Walker",
+  "license": "ISC",
+  "dependencies": {
+    "restify": "^6.3.4",
+    "botbuilder": "^3.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.5"
+  }
+}
