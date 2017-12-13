@@ -25,6 +25,9 @@ var bot = new builder.UniversalBot(connector,
         (session) => {
             session.beginDialog('greetings', session.userData.profile);
         },
+        (session) => {
+            session.beginDialog('enquiry', session.userData.enquiry);
+        },
         (session, results) => {
             const profile = session.userData.profile = results.response;
             session.endConversation(`I hope I was able to answer your queries adequately. Goodbye ${profile.name}.`);
@@ -37,8 +40,7 @@ bot.dialog('greetings', [
     (session, args, next) => {
         session.dialogData.profile = args || {};
         if (!session.dialogData.profile.name) {
-            session.send("Hello there!");
-            builder.Prompts.text(session, `Before we begin, let me get to know you a bit. What is your name?`);
+            builder.Prompts.text(session, `Hi! Before we begin, let me get to know you a bit. What is your name?`);
         } else {
             next();
         }
@@ -68,10 +70,25 @@ bot.dialog('greetings', [
             session.dialogData.profile.location = results.response;
         }
         if(!session.dialogData.profile.issue) {
-            builder.Prompts.text(session, `Ahh ${results.response}, not too far from me. Let's get on with your enquiry.`)
-            session.endDialogWithResult({ response: session.dialogData.profile});
+            builder.Prompts.text(session, `Ahhh ${results.response}. Anyway, I assume we are chatting because you want to know about vaids?`)
+        }
+        
+     },
+     (session, results) => {
+        session.endDialogWithResult({ response: session.dialogData.profile});
+     }
+]);
+
+bot.dialog('enquiry', [
+    (session, args, next) => {
+        session.dialogData.enquiry = args || {};
+        if (!session.dialogData.enquiry.enquiry) {
+            builder.Prompts.choice(session, "Please select the closest option", "Why Vaids|Vaids Essentials|Vaids Participation", { listStyle: 3});
         } else {
             next();
         }
-     },
+    },
+    (session, results) => {
+        session.endDialogWithResult({ response: session.dialogData.enquiry});
+     }
 ]);
