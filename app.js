@@ -143,10 +143,62 @@ bot.dialog('/Why Vaids?', [
         //session.endDialog();
     },
     function (session, results) {
-        if((results.response) ==='What is the Voluntary Asset & Income Declaration Scheme?'){
-            session.send("You can pass a custom ");
+        if(results.response && results.response.entity =='What is the Voluntary Asset & Income Declaration Scheme?'){
+            session.send('VAIDS is a time-limited opportunity for taxpayers to regularize their tax status relating to previous tax periods. In exchange for fully and honestly declaring previously undisclosed assets and income, tax payers will benefit from forgiveness of overdue interest and penalties, and the assurance that they will not face criminal prosecution for tax offences or be subject to tax investigations. VAIDS ushers in an opportunity to increase the nation’s general tax awareness and compliance.');
         }
-        session.endDialog('You can pass');
+        else if(results.response && results.response.entity =='Why is the FG offering this scheme?'){
+            session.send("Nigeria’s tax system is based on global best practice. It is a progressive system that ensures fairness. Those with the highest income levels should shoulder the greatest proportion of the tax burden. Whilst considerable progress has been made with taxing those in formal employment, self-employed persons, professionals and some companies are able to evade full tax payment due to the inability of the tax authorities to assess their true income and thereby tax them accurately. According to the Joint Tax Board (JTB), as at May 2017 the total number of taxpayers in Nigeria is just 14 million out of an estimated 69.9 million who are economically active.\
+            \
+            \n\nNigeria’s tax to GDP ratio, at just 6%, is one of the lowest in the world (compared to India’s of 16%, Ghana’s of 15.9%, and South Africa’s of 27%). Most developed nations have tax to GDP ratios of between 32% and 35%.\
+            Some of the ways in which taxes are evaded include:\
+            \
+            \n\nManipulating accounting records by keeping two sets of books\
+            Many states have lacked the machinery to accurately track the true income of their residents.\
+            Use of complex structures in transactions to evade taxes.\
+            Non registration for VAT, or charging of VAT without remitting to FIRS.\
+            Non payment of Capital Gains Tax (CGT) on asset disposals.\
+            Nigeria\'s low tax revenues are at variance with the lifestyles of a large number of its people and with the value of assets known to be owned by Nigerians resident around the world. There has been a systemic breakdown of compliance with the tax system with various strategies used to evade tax obligations. These include but are not limited to, transfer of assets overseas, the use of offshore companies in tax havens to secure assets, and the registration of assets in nominee names. In addition despite having some of the most profitable and well capitalized companies in Africa, the level of tax remittance is low.")
+        }
+        else if (results.response && results.response.entity =='Why is the FG implementing VAIDS now?'){
+            session.send("There is currently a global initiative to tackle the problem of illicit financial flows and tax evasion,\
+            which has contributed to the country’s underdevelopment. A report by former South African Premier, Thabo Mbeki\
+            found that the amount of illicit financial flows out of Africa exceeded the amount of development aid that Africa receives.\
+            Nigeria has the highest level of illicit financial flows in Africa. \
+           \
+           \n\nAs part of the global support to rebuild Nigeria under President Muhammadu Buhari, \
+           the Government has secured the co-operation of a number of nation states in its quest \
+           \to repatriate funds due to it. Nigeria has also signed agreements with a number of nations,\
+            which provide for the Automatic Exchange of Information (AEI). Countries who are party to this \
+            agreement include Switzerland, Panama, the Bahamas and other tax havens. Additionally, banking \
+            information will easily be shared across countries due to newly implemented Common Reporting Standards (CRS).\
+           \
+           \n\nOn 16 August, 2016 the Federal Executive Council approved Nigeria’s participation in the Country-by-Country \
+           reporting standard. This will provide tax authorities with greater transparency into the scale of multinational \
+           company operations, and enable increased detection of profit shifting and other tax evasion strategies. In addition, \
+           Nigeria has signed up for the establishment of the Beneficial Ownership Register at the Anti-Corruption Summit in \
+           London in 2016. The will give us access to true owners of properties in the UK and other participating countries.\
+           \
+           \n\nWithin Nigeria, recent reforms provide additional information to the tax authorities. \
+           There is now increased interagency cooperation providing information from BVN, NFIU, State \
+           Land Registries, CAC, and other agencies to create an accurate financial picture of Nigeria’s tax payers. \
+           In addition, the asset tracing team of the Ministry of Finance has engaged international asset tracing \
+           professionals who have been gathering information on individuals and companies which suggests that the \
+           level of non-compliance is significant; therefore VAIDS is offering an opportunity for tax payers to voluntarily regularize their tax status.")
+        }
+        else if (results.response && results.response.entity =='Why aren\'t tax evaders persecuted?'){
+            session.send("Even though ignorance of the law is not an excuse, Government has decided to take the pragmatic approach \
+            of offering an amnesty window to allow Nigerians, who may have evaded tax, whether ignorantly or deliberately, \
+            the opportunity to do their civic duty and pay the correct taxes whilst providing much needed revenue for Nigeria’s infrastructure. \
+            A number of countries, including Indonesia, Italy and Argentina, who have seen their tax revenues illegally moved \
+            to other nations have undertaken similar programmes to fund their national development. This will reduce the amount\
+             that Government will need to borrow for essential projects and will enable Nigeria to make a concerted effort to\
+             upgrade essential infrastructure and spur development.\
+            \
+            \n\nUpon expiration of the Voluntary Asset and Income Declaration programme, \
+            Government will commence criminal prosecution of those who have evaded taxes and yet failed to take advantage of the scheme.")            
+        }
+
+        session.endDialog('I hope that answers your query.');
     }    
 ]);
 
