@@ -92,13 +92,16 @@ bot.dialog('/', [
         // Send a greeting and show help.
         var card = new builder.HeroCard(session)
             .title("The VAIDS Bot")
-            .text("There to help, whenever")
+            .text("Always there to help")
             .images([
                  builder.CardImage.create(session, "http://oi66.tinypic.com/2z52dc3.jpg")
             ]);
         var msg = new builder.Message(session).attachments([card]);
         session.send(msg);
-        session.send("Hi... I am the VAIDS bot for skype. I will answer your queries");
+        session.send("Hi... I am the VAIDS bot for skype and I will be answering your queries");
+        session.beginDialog('greetings', session.userData.profile);
+    },
+    function(session, results){
         session.beginDialog('/help');
     },
     function (session, results) {
@@ -111,6 +114,51 @@ bot.dialog('/', [
     }
 ]);
 
+bot.dialog('greetings', [
+    (session, args, next) => {
+        session.dialogData.profile = args || {};
+        if (!session.dialogData.profile.name) {
+            builder.Prompts.text(session, `Hi! Before we begin, let me get to know you a bit. What is your name?`);
+        } else {
+            next();
+        }
+    },
+    (session, results, next) => {
+        if(results.response) {
+            if((results.response).match(/\Wis\W/)){
+                results.response = ((results.response).slice((results.response).indexOf('is')+2)).trim();
+            }
+            session.dialogData.profile.name = results.response;
+        }
+        if(!session.dialogData.profile.location) {
+            builder.Prompts.text(session, `Oh hello ${results.response}. What area are you chatting from?`)
+        } else {
+            next();
+        }
+    },
+    (session, results, next) => {
+        if(results.response) {
+            session.dialogData.profile.location = results.response;
+            if((results.response).toLowerCase().match(/\Wfrom\W/)){
+                results.response = ((results.response).slice((results.response).indexOf('from')+4)).trim();
+                 }
+            else if ((results.response).toLowerCase().match(/\Wis\W/)){
+                results.response = ((results.response).slice((results.response).indexOf('is')+2)).trim();
+            }
+            else if ((results.response).toLowerCase().match(/\Win\W/)){
+                results.response = ((results.response).slice((results.response).indexOf('in')+2)).trim();
+            }
+            session.dialogData.profile.location = results.response;
+        }
+        if(!session.dialogData.profile.issue) {
+            builder.Prompts.text(session, `Ahhh ${results.response}, nice to meet you. Before we start, lets run through some instructions. OK?`)
+        }
+        
+     },
+     (session, results) => {
+        session.endDialogWithResult({ response: session.dialogData.profile});
+     }
+]);
 bot.dialog('/menu', [
     function (session) {
         //prompts|picture|cards|list|carousel|receipt|actions|(quit)
@@ -129,11 +177,11 @@ bot.dialog('/menu', [
         // The menu runs a loop until the user chooses to (quit).
         session.replaceDialog('/menu');
     }
-]).reloadAction('reloadMenu', null, { matches: /^menu|show menu/i });
+]).reloadAction('reloadMenu', null, { matches: /^menu|show menu|main menu/i });
 
 bot.dialog('/help', [
     function (session) {
-        session.endDialog("If you type:\n\n* 'menu' - You will be given the main menu.\n* 'goodbye' - You will end this conversation.\n* 'help' - These commands will be displayed.");
+        session.endDialog("If you type:\n\n* 'menu' or 'show menu' - You will be given the main menu.\n* 'goodbye' or 'bye' - You will end this conversation.\n* 'help' - And these commands will be displayed again incase you forget. \n\n   PS - You can also press the (quit) button to end this anytime.");
     }
 ]);
 
