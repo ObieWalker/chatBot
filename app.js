@@ -207,8 +207,8 @@ bot.dialog('/Why Vaids?', [
 bot.dialog('/Vaids Essentials', [
     function (session) {
         builder.Prompts.choice(session, "Please select the closest option to your query", "How long will VAIDS last?|\
-        What are the benefits?|What types of Taxes will be covered?|Which period of default will be covered?|\
-        Who can participate in the scheme?|Can companies make declarations as well?|Where can one get information about VAIDS?", { listStyle: 3});
+What are the benefits?|What types of Taxes will be covered?|Which period of default will be covered?|\
+Who can participate in the scheme?|Can companies make declarations as well?|Where can one get information about VAIDS?", { listStyle: 3});
     },
     function (session, results) {
         if (results.response && results.response.entity =='How long will VAIDS last?'){
@@ -246,10 +246,10 @@ bot.dialog('/Vaids Essentials', [
             session.send("VAIDS is open to all persons who are in default on their tax liabilities. \
             The Scheme is specifically targeted at taxpayers who:\
             \
-            \nhave not been fully declaring their taxable income/assets;\
-            \nhave not been paying the tax due at all and or\
-            \nhave been underpaying or under remitting\
-            It does not matter whether the relevant tax default arose \
+            \n1. Have not been fully declaring their taxable income/assets;\
+            \n2. Have not been paying the tax due at all and or\
+            \n3. Have been underpaying or under remitting\
+            \nIt does not matter whether the relevant tax default arose \
             from undeclared assets within or outside the country. \
             If tax should have been paid, VAIDS is providing a once in a lifetime\
              opportunity to declare the tax outstanding and resolve it definitively.")
