@@ -200,9 +200,8 @@ bot.dialog('/Why Vaids?', [
         else{
             session.send("I feel you did not make a selection from the options")
         }
-
         session.endDialog('I hope that answers your query.');
-    }    
+    }
 ]);
 
 bot.dialog('/Vaids Essentials', [
@@ -255,7 +254,19 @@ bot.dialog('/Vaids Essentials', [
             If tax should have been paid, VAIDS is providing a once in a lifetime\
              opportunity to declare the tax outstanding and resolve it definitively.")
         }
-
+        else if (results.response && results.response.entity =='Can companies make declarations as well?'){
+            session.send("The Scheme covers all taxable persons and entities including individuals,\
+            trusts, executors, registered companies and statutory companies.")
+        }
+        else if (results.response && results.response.entity =='Where can one get information about VAIDS?'){
+            session.send("Further information can be obtained from the information unit of the \
+            Federal Inland Revenue Service (FIRS), various State Boards Internal \
+            Revenue Services(SBIRS) and the dedicated website of the Scheme www.vaids.gov.ng.")
+        }
+        else{
+            session.send("You did not pick an option")
+        }
+        session.endDialog('I hope that answers your query.');
     }
 ]);
 
