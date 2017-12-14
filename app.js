@@ -131,7 +131,7 @@ bot.dialog('greetings', [
             session.dialogData.profile.name = results.response;
         }
         if(!session.dialogData.profile.location) {
-            builder.Prompts.text(session, `Oh hello ${results.response}. What area are you chatting from?`)
+            builder.Prompts.text(session, `Oh hello ${results.response}, nice to meet you. What area are you chatting from?`)
         } else {
             next();
         }
@@ -151,7 +151,7 @@ bot.dialog('greetings', [
             session.dialogData.profile.location = results.response;
         }
         if(!session.dialogData.profile.issue) {
-            builder.Prompts.text(session, `Ahhh ${results.response}, nice to meet you. Before we start, lets run through some instructions. OK?`)
+            builder.Prompts.text(session, `Ahhh ${results.response}? I am a bot so I have never been there. Before we start, lets run through some instructions. OK?`)
         }
         
      },
@@ -206,11 +206,11 @@ bot.dialog('/Why Vaids?', [
             Most developed nations have tax to GDP ratios of between 32% and 35%.\
             Some of the ways in which taxes are evaded include:\
             \
-            \n\n1. Manipulating accounting records by keeping two sets of books\
-            \n2. Many states have lacked the machinery to accurately track the true income of their residents.\
-            \n3. Use of complex structures in transactions to evade taxes.\
-            \n4. Non registration for VAT, or charging of VAT without remitting to FIRS.\
-            \n5. Non payment of Capital Gains Tax (CGT) on asset disposals.\
+            \n\n* Manipulating accounting records by keeping two sets of books\
+            \n* Many states have lacked the machinery to accurately track the true income of their residents.\
+            \n* Use of complex structures in transactions to evade taxes.\
+            \n* Non registration for VAT, or charging of VAT without remitting to FIRS.\
+            \n* Non payment of Capital Gains Tax (CGT) on asset disposals.\
             \nNigeria\'s low tax revenues are at variance with the lifestyles of a large number of its people \
             and with the value of assets known to be owned by Nigerians resident around the world. \
             There has been a systemic breakdown of compliance with the tax system with various strategies used \
@@ -305,9 +305,9 @@ Who can participate in the scheme?|Can companies make declarations as well?|Wher
             session.send("VAIDS is open to all persons who are in default on their tax liabilities. \
             The Scheme is specifically targeted at taxpayers who:\
             \
-            \n1. Have not been fully declaring their taxable income/assets;\
-            \n2. Have not been paying the tax due at all and or\
-            \n3. Have been underpaying or under remitting\
+            \n* Have not been fully declaring their taxable income/assets;\
+            \n* Have not been paying the tax due at all and or\
+            \n*. Have been underpaying or under remitting\
             \nIt does not matter whether the relevant tax default arose \
             from undeclared assets within or outside the country. \
             If tax should have been paid, VAIDS is providing a once in a lifetime\
@@ -331,99 +331,141 @@ Who can participate in the scheme?|Can companies make declarations as well?|Wher
 
 bot.dialog('/Vaids Participation', [
     function (session) {
-        builder.Prompts.choice(session, "Please select the closest option to your query", " How do I pay the tax due?|Pay all liabilities at once?|I don't know how much tax I owe?|My obligations be going forward as a result of my declaration?|I have no TIN and never paid tax?|FIRS and SBIRS invite people to participate?|Must I be resident in Nigeria to participate?|What if I spend time abroad?|For those that don't participate?|Pay tax on overseas income and assets?|Assets located outside of the country on which no income is earned?|Assets that are owned in no-tax jurisdictions?|Assets held in nominee names? Can they now be formally declared? Am I free to transfer them after the declaration?|The effect on waiver of interest and penalty introduced by the FIRS?|Will the tax authority review the information filed?|What about taxes I have already paid?|Can I declare anonymously?|Assurance that information provided  isn't be used against me?", { listStyle: 3});
-    }
-]);
-
-bot.dialog('/test', [
-    function (session) {
-        session.send("You can send the user a list of cards as multiple attachments in a single message...");
-    }
-]);
-
-bot.dialog('/carousel', [
-    function (session) {
-        session.send("You can pass a custom message to Prompts.choice() that will present the user with a carousel of cards to select from. Each card can even support multiple actions.");
-    },
+        builder.Prompts.choice(session, "Please select the closest option to your query", "How do I pay the tax due?|\
+Pay all liabilities at once?|I don\'t know how much tax I owe?|My obligations be going forward as a result of my declaration?|\
+I have no TIN and never paid tax?|FIRS and SBIRS invite people to participate?|Must I be resident in Nigeria to participate?What if I spend time abroad?|\
+For those that don't participate?|Pay tax on overseas income and assets?|\
+Assets located outside of the country on which no income is earned?|Assets that are owned in no-tax jurisdictions?|\
+Assets held in nominee names? Can they now be formally declared? Am I free to transfer them after the declaration?|\
+The effect on waiver of interest and penalty introduced by the FIRS?|Will the tax authority review the information filed?|\
+What about taxes I have already paid?|Can I declare anonymously?|Assurance that information provided  isn't used against me?", { listStyle: 3});
+     },
     function (session, results) {
-        var action, item;
-        var kvPair = results.response.entity.split(':');
-        switch (kvPair[0]) {
-            case 'select':
-                action = 'selected';
-                break;
+        if (results.response && results.response.entity =='How do I pay the tax due?'){
+            session.send("All taxes paid under the Scheme are to be collected by the relevant tax authorities including \
+            the FIRS and SBIRS, depending on the type of tax in issue. Payments should be made to the Relevant \
+            Tax Authority quoting your full name and TIN as a reference. The bank will issue a receipt for the payment.")
         }
-        switch (kvPair[1]) {
-            case '100':
-                item = "the <b>Space Needle</b>";
-                break;
-            case '101':
-                item = "<b>Pikes Place Market</b>";
-                break;
-            case '102':
-                item = "the <b>EMP Museum</b>";
-                break;
+        else if (results.response && results.response.entity =='Pay all liabilities at once?'){
+            session.send("The Federal Government appreciates that many defaulters have assets but may not have cash. \
+            Therefore taxpayers will be allowed to enter into arrangements to pay outstanding tax liabilities in installments. \
+            Taxpayers may, at the discretion of the relevant authority, be granted up to three years to pay their liability,\
+             but will be obligated to pay interest on the outstanding balance.")
         }
-        session.endDialog('You %s "%s"', action, item);
-    }    
-]);
-
-bot.dialog('/receipt', [
-    function (session) {
-        session.send("You can send a receipts for purchased good with both images and without...");
-        
-        // Send a receipt with images
-        var msg = new builder.Message(session)
-            .attachments([
-                new builder.ReceiptCard(session)
-                    .title("Recipient's Name")
-                    .items([
-                        builder.ReceiptItem.create(session, "$22.00", "EMP Museum").image(builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/a/a0/Night_Exterior_EMP.jpg")),
-                        builder.ReceiptItem.create(session, "$22.00", "Space Needle").image(builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/7/7c/Seattlenighttimequeenanne.jpg"))
-                    ])
-                    .facts([
-                        builder.Fact.create(session, "1234567898", "Order Number"),
-                        builder.Fact.create(session, "VISA 4076", "Payment Method"),
-                        builder.Fact.create(session, "WILLCALL", "Delivery Method")
-                    ])
-                    .tax("$4.40")
-                    .total("$48.40")
-            ]);
-        session.send(msg);
-
-        // Send a receipt without images
-        msg = new builder.Message(session)
-            .attachments([
-                new builder.ReceiptCard(session)
-                    .title("Recipient's Name")
-                    .items([
-                        builder.ReceiptItem.create(session, "$22.00", "EMP Museum"),
-                        builder.ReceiptItem.create(session, "$22.00", "Space Needle")
-                    ])
-                    .facts([
-                        builder.Fact.create(session, "1234567898", "Order Number"),
-                        builder.Fact.create(session, "VISA 4076", "Payment Method"),
-                        builder.Fact.create(session, "WILLCALL", "Delivery Method")
-                    ])
-                    .tax("$4.40")
-                    .total("$48.40")
-            ]);
-        session.endDialog(msg);
+        else if (results.response && results.response.entity =='I don\'t know how much tax I owe?'){
+            session.send("Once you register for VAIDS by filing the Declaration form, agents of the Relevant Tax Authority \
+            can help you to calculate your tax liability. VAIDS will also be providing extensive training \
+            to legal advisers, tax accountants and other professionals to ensure that taxpayers fully \
+            understand their obligations under Nigeria’s tax laws.")
+        }
+        else if (results.response && results.response.entity =='My obligations be going forward as a result of my declaration?'){
+            session.send("Taxpayers will be expected to remain fully compliant with tax laws following the Scheme, \
+            failing which, they may be forced to forfeit the tax forgiveness granted under \
+            VAIDS and be liable to pay past liabilities in full.")
+        }
+        else if (results.response && results.response.entity =='I have no TIN and never paid tax?'){
+            session.send("Registration for a Tax Identification Number would be the first step for persons who have never paid tax.\
+            Your application for a TIN will be fast tracked.")
+        }
+        else if (results.response && results.response.entity =='FIRS and SBIRS invite people to participate?'){
+            session.send("The idea of the Scheme is that it is a voluntary programme, the decision to participate should \
+            therefore be left to the taxpayers. The FIRS shall give effective publicity to the program\
+             and encourage as many people as possible to take advantage of it.")
+        }
+        else if (results.response && results.response.entity =='Must I be resident in Nigeria to participate?What if I spend time abroad?'){
+            session.send("The Scheme is open to all those who were liable to tax in Nigeria. It covers Nigerian residents \
+            who had taxable undeclared income outside Nigeria and non – residents who earned \
+            undeclared income derived from or accruing within Nigeria.\
+            \
+            \n\nThose who are resident outside of Nigeria are encouraged to make an online declaration, \
+            or to appoint a local agent to make the necessary declaration on their behalf.")
+        }
+        else if (results.response && results.response.entity =='For those that don\'t participate?'){
+            session.send("Those who fail to take advantage of the Scheme and are later found to have under declared \
+            their income or assets will be treated as wilful tax evaders and will therefore face the full force of the law.\
+            \
+            Specifically, we have engaged on retainership, one of the world’s leading asset tracing and \
+            recovery firms who will track the true assets of those who have not participated but are believed to have underpaid their taxes.\
+            \
+            This will be supported by criminal prosecution, and recovery of taxes due with full penalties and interest. \
+            In addition, we plan a “Name and Shame” programme that will reveal the identities of tax evaders.\
+            \
+            Furthermore, the Relevant Tax Authorities are in the process of profiling certain categories of non-compliant \
+            taxpayers for ongoing audits and investigations, in line with the tax compliance reforms. \
+            As such, taxpayers are encouraged to make the most of the time-limited opportunity available under the Scheme to \
+            declare their incomes and assets, and pay outstanding tax liabilities to avoid the adverse consequences inherent \
+            in the tax enforcement processes to be implemented by the Relevant Tax Authorities at the end of the Scheme.")
+        }
+        else if (results.response && results.response.entity =='Pay tax on overseas income and assets?'){
+            session.send("Nigerian tax law is clear that Nigerian tax residents are liable to pay tax on their \
+            income earned anywhere in the world. Nigerian tax residents include the following:\
+            \
+            \n\n* Individuals that derive income from sources in Nigeria;\
+            \n\n* Employees that are in Nigerian employment or resident in Nigeria \
+            for at least 183 days within a twelve month period; and\
+            \n\n* Nigerian companies who were incorporated or have a fixed base in Nigeria.")
+        }
+        else if (results.response && results.response.entity =='Assets located outside of the country on which no income is earned?'){
+            session.send("Some Nigerians own assets overseas, but do not earn any revenue on them, rather they are for personal use.\
+            In such cases, they might not have taxable income but if the original purchase of those assets was, \
+            in any way, financed from revenue earned by a Nigerian tax payer but on which the correct amount \
+            of tax was not paid in Nigeria, then the unpaid tax liability may attach to that overseas asset.\
+           \
+           \n\nThe information obtained on some citizens suggest clearly that the funds they used to \
+           purchase overseas assets far exceed the income declared in the tax returns in the year pf purchase. \
+           Such Tax Returns are therefore rendered false and a tax liability exists.")
+        }
+        else if (results.response && results.response.entity =='Assets that are owned in no-tax jurisdictions?'){
+            session.send("The use of Tax Avoidance Schemes is legal but tax evasion is not. \
+            If the ultimate beneficial owner of those assets had paid all taxes on the funds\
+             prior to their transfer to the tax shelter, then there will be no additional liability\
+             except any tax payable on further income earned on those funds. However if the correct \
+             amount of tax was not paid prior to transfer, then a liability exists and Government is\
+             entitled to trace its tax claim through to those assets and any income that arises from them.")
+        }
+        else if (results.response && results.response.entity =='Assets held in nominee names? Can they now be formally declared? Am I free to transfer them after the declaration?'){
+            session.send("All assets owned, whether held directly or indirectly should be formally declared. \
+            VAIDS will also entail the creation of proper records so that future dealings\
+             with such assets will be properly recorded. The owner of assets held in nominee’s names \
+             can then freely transfer them based on the extant law.\
+            \
+            \n\nAfter declaration, the owner of assets held in nominee’s names can then freely transfer them based on the extant law.")
+        }
+        else if (results.response && results.response.entity =='The effect on waiver of interest and penalty introduced by the FIRS?'){
+            session.send("The grace period recently allowed by FIRS for waiver of interest and penalties \
+            pursuant to the recent tax amnesty has lapsed. VAIDS is more comprehensive in terms of taxes and timeframe. \
+            It covers personal taxes as well as company taxes. The commitments made by the FIRS during the \
+            Scheme will be respectably saved for discovery of new facts, non-disclosure and partial disclosure.\
+            \
+            \n\nThis will be supported by criminal prosecution, and recovery of taxes due with full penalties and interest. \
+            In addition, we plan a “Name and Shame” programme that will reveal the identities of tax evaders.")
+        }
+        else if (results.response && results.response.entity =='Will the tax authority review the information filed?'){
+            session.send("Yes. The tax authority will review the information supplied by the taxpayer. \
+            If they are not satisfied with its completeness, they may ask for additional information. \
+            Indeed, The Relevant Tax Authorities are empowered by specific provisions of the relevant \
+            tax laws to require participating taxpayers to produce any books, documents, accounts, returns and other records.\
+            \
+            \n\nWithin the Scheme period, an applicant can file an amended declaration if further tax liabilities are identified.\
+             However, all information must be received within the duration of VAIDS.")
+        }
+        else if (results.response && results.response.entity =='What about taxes I have already paid?'){
+            session.send("All taxes already paid will be taken into account into determining the final tax position of a taxpayer.")
+        }
+        else if (results.response && results.response.entity =='Can I declare anonymously?'){
+            session.send("No! Declaration cannot be made anonymously. For any taxpayer to get clearance, \
+            he must have declared correctly and made payment in his own name or that of his company\
+             as the case may be. Tax declarations are however treated as confidential by the tax authorities.")
+        }
+        else if (results.response && results.response.entity =='Assurance that information provided  isn\'t used against me?'){
+            session.send("The confidentiality of the information you provide under the Scheme is assured. \
+            Measures have been put in place for information received by the tax authority will\
+             be kept in strict confidence, and will not be disclosed to third parties other than \
+             in compliance with extant provisions of relevant laws.")
+        }
+        session.endDialog('I hope that answers your query.');
     }
 ]);
-
-bot.dialog('/signin', [ 
-    function (session) { 
-        // Send a signin 
-        var msg = new builder.Message(session) 
-            .attachments([ 
-                new builder.SigninCard(session) 
-                    .text("You must first signin to your account.") 
-                    .button("signin", "http://example.com/") 
-            ]); 
-        session.endDialog(msg); 
-    } 
-]); 
 
 
 bot.dialog('/actions', [
