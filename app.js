@@ -197,6 +197,9 @@ bot.dialog('/Why Vaids?', [
             \n\nUpon expiration of the Voluntary Asset and Income Declaration programme, \
             Government will commence criminal prosecution of those who have evaded taxes and yet failed to take advantage of the scheme.")            
         }
+        else{
+            session.send("I feel you did not make a selection from the options")
+        }
 
         session.endDialog('I hope that answers your query.');
     }    
@@ -204,7 +207,55 @@ bot.dialog('/Why Vaids?', [
 
 bot.dialog('/Vaids Essentials', [
     function (session) {
-        builder.Prompts.choice(session, "Please select the closest option to your query", "How long will VAIDS last?|What are the benefits?|What types of Taxes will be covered?|Which period of default will be covered?|Who can participate in the scheme?|Can companies make declarations as well?|Where can one get information about VAIDS?", { listStyle: 3});
+        builder.Prompts.choice(session, "Please select the closest option to your query", "How long will VAIDS last?|\
+        What are the benefits?|What types of Taxes will be covered?|Which period of default will be covered?|\
+        Who can participate in the scheme?|Can companies make declarations as well?|Where can one get information about VAIDS?", { listStyle: 3});
+    },
+    function (session, results) {
+        if (results.response && results.response.entity =='How long will VAIDS last?'){
+            session.send("The Scheme is expected to last for 9 months only from 1st July, 2017 to 31st March, 2018.\
+            There will be no renewal or extension, once the scheme period has expired all remaining \
+            tax defaulters who have not taken advantage of its will face the full force of the law.")
+        }
+        else if (results.response && results.response.entity =='What are the benefits?'){
+            session.send("Tax evasion is a crime punishable, upon conviction, by imprisonment of up to 5 years, \
+            while the taxpayer will still be required to pay the tax due along with the associated interest and penalties. \
+            Typically, a penalty of 10% of the tax due is assessed, along with related interest charges that accrue at 21% per annum, \
+            commencing from the due date of the related tax charge. In some cases, the penalty assessed is 100% of the tax due and further, \
+            the related assets are liable to be forfeited. Those taking advantage of the Scheme by declaring honestly and fully \
+            will be free from prosecution and will qualify for the forgiveness of penalties and interest.\
+            \
+            \
+            \n\n\nAnother benefit of participating in the Scheme, is that tax payers will be able to transfer\
+             assets that they had previously held by nominees into their own name. It should be remembered that\
+             many Nigerians have lost assets in the course of trying to conceal them from the authorities. \
+             Such losses typically occur in the event of death or an urgent need to liquidate assets when \
+             required documentation and proof of ownership cannot be provided. The global focus on illicit \
+             financial flows is such that global regulations will only become tighter with time, thus this \
+             opportunity to regularise should be seized. Declaration allows assets to be legally and formally held by the true owner.")
+        }
+        else if(results.response && results.response.entity =='What types of Taxes will be covered?'){
+            session.send("The Scheme will cover all Federal and State taxes such as Companies Income Tax,\
+            Personal Income Tax, Petroleum Profits Tax, Capital Gains Tax, Stamp Duties, Tertiary Education Tax.")
+        }
+        else if(results.response && results.response.entity =='Which period of default will be covered?'){
+            session.send("While the statute of limitations for a tax investigation for honest returns is limited to six years, \
+            there is no limit where a fraudulent return has been submitted. \
+            A condition of VAIDS is that tax payers will declare fully and honestly.")
+        }
+        else if(results.response && results.response.entity =='Who can participate in the scheme?'){
+            session.send("VAIDS is open to all persons who are in default on their tax liabilities. \
+            The Scheme is specifically targeted at taxpayers who:\
+            \
+            \nhave not been fully declaring their taxable income/assets;\
+            \nhave not been paying the tax due at all and or\
+            \nhave been underpaying or under remitting\
+            It does not matter whether the relevant tax default arose \
+            from undeclared assets within or outside the country. \
+            If tax should have been paid, VAIDS is providing a once in a lifetime\
+             opportunity to declare the tax outstanding and resolve it definitively.")
+        }
+
     }
 ]);
 
