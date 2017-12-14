@@ -82,6 +82,7 @@ bot.use(builder.Middleware.dialogVersion({ version: 1.0, resetCommand: /^reset/i
 
 bot.endConversationAction('goodbye', 'I hope I was able to answer your queries adequately. Goodbye', { matches: /^goodbye|bye|good bye/i});
 bot.beginDialogAction('help', '/help', { matches: /^help|help me|i need help/i });
+bot.beginDialogAction('Why Vaids?', '/Why Vaids?', { matches: /^Why Vaids?|why vaids|why use vaids|why should i use vaids/i });
 
 //=========================================================
 // Bots Dialogs
@@ -107,6 +108,9 @@ bot.dialog('/', [
     function (session, results) {
         // Display menu
         session.beginDialog('/menu');
+    },
+    function(session, results){
+        session.beginDialog('/Why Vaids?');
     },
     function (session, results) {
         // Always say goodbye
