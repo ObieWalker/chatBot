@@ -122,7 +122,7 @@ bot.dialog('greetings', [
     (session, args, next) => {
         session.dialogData.profile = args || {};
         if (!session.dialogData.profile.name) {
-            builder.Prompts.text(session, `Hi! Before we begin, let me get to know you a bit. What is your name?`);
+            builder.Prompts.text(session, `Before we begin, let me get to know you a bit. What is your name?`);
         } else {
             next();
         }
@@ -311,7 +311,7 @@ Who can participate in the scheme?|Can companies make declarations as well?|Wher
             \
             \n* Have not been fully declaring their taxable income/assets;\
             \n* Have not been paying the tax due at all and or\
-            \n*. Have been underpaying or under remitting\
+            \n* Have been underpaying or under remitting\
             \nIt does not matter whether the relevant tax default arose \
             from undeclared assets within or outside the country. \
             If tax should have been paid, VAIDS is providing a once in a lifetime\
@@ -337,7 +337,7 @@ bot.dialog('/Vaids Participation', [
     function (session) {
         builder.Prompts.choice(session, "Please select the closest option to your query", "How do I pay the tax due?|\
 Pay all liabilities at once?|I don\'t know how much tax I owe?|My obligations be going forward as a result of my declaration?|\
-I have no TIN and never paid tax?|FIRS and SBIRS invite people to participate?|Must I be resident in Nigeria to participate?What if I spend time abroad?|\
+I have no TIN and never paid tax?|FIRS and SBIRS invite people to participate?|Must I be resident in Nigeria to participate? What if I spend time abroad?|\
 For those that don't participate?|Pay tax on overseas income and assets?|\
 Assets located outside of the country on which no income is earned?|Assets that are owned in no-tax jurisdictions?|\
 Assets held in nominee names? Can they now be formally declared? Am I free to transfer them after the declaration?|\
@@ -376,7 +376,7 @@ What about taxes I have already paid?|Can I declare anonymously?|Assurance that 
             therefore be left to the taxpayers. The FIRS shall give effective publicity to the program\
              and encourage as many people as possible to take advantage of it.")
         }
-        else if (results.response && results.response.entity =='Must I be resident in Nigeria to participate?What if I spend time abroad?'){
+        else if (results.response && results.response.entity =='Must I be resident in Nigeria to participate? What if I spend time abroad?'){
             session.send("The Scheme is open to all those who were liable to tax in Nigeria. It covers Nigerian residents \
             who had taxable undeclared income outside Nigeria and non – residents who earned \
             undeclared income derived from or accruing within Nigeria.\
