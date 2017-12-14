@@ -147,17 +147,28 @@ bot.dialog('/Why Vaids?', [
             session.send('VAIDS is a time-limited opportunity for taxpayers to regularize their tax status relating to previous tax periods. In exchange for fully and honestly declaring previously undisclosed assets and income, tax payers will benefit from forgiveness of overdue interest and penalties, and the assurance that they will not face criminal prosecution for tax offences or be subject to tax investigations. VAIDS ushers in an opportunity to increase the nation’s general tax awareness and compliance.');
         }
         else if(results.response && results.response.entity =='Why is the FG offering this scheme?'){
-            session.send("Nigeria’s tax system is based on global best practice. It is a progressive system that ensures fairness. Those with the highest income levels should shoulder the greatest proportion of the tax burden. Whilst considerable progress has been made with taxing those in formal employment, self-employed persons, professionals and some companies are able to evade full tax payment due to the inability of the tax authorities to assess their true income and thereby tax them accurately. According to the Joint Tax Board (JTB), as at May 2017 the total number of taxpayers in Nigeria is just 14 million out of an estimated 69.9 million who are economically active.\
+            session.send("Nigeria’s tax system is based on global best practice. It is a progressive system that ensures fairness. \
+            Those with the highest income levels should shoulder the greatest proportion of the tax burden. \
+            Whilst considerable progress has been made with taxing those in formal employment, self-employed persons, \
+            professionals and some companies are able to evade full tax payment due to the inability of the tax authorities \
+            to assess their true income and thereby tax them accurately. According to the Joint Tax Board (JTB), as at May 2017 \
+            the total number of taxpayers in Nigeria is just 14 million out of an estimated 69.9 million who are economically active.\
             \
-            \n\nNigeria’s tax to GDP ratio, at just 6%, is one of the lowest in the world (compared to India’s of 16%, Ghana’s of 15.9%, and South Africa’s of 27%). Most developed nations have tax to GDP ratios of between 32% and 35%.\
+            \n\nNigeria’s tax to GDP ratio, at just 6%, is one of the lowest in the world (compared to India’s of 16%, Ghana’s of 15.9%, and South Africa’s of 27%). \
+            Most developed nations have tax to GDP ratios of between 32% and 35%.\
             Some of the ways in which taxes are evaded include:\
             \
-            \n\nManipulating accounting records by keeping two sets of books\
-            Many states have lacked the machinery to accurately track the true income of their residents.\
-            Use of complex structures in transactions to evade taxes.\
-            Non registration for VAT, or charging of VAT without remitting to FIRS.\
-            Non payment of Capital Gains Tax (CGT) on asset disposals.\
-            Nigeria\'s low tax revenues are at variance with the lifestyles of a large number of its people and with the value of assets known to be owned by Nigerians resident around the world. There has been a systemic breakdown of compliance with the tax system with various strategies used to evade tax obligations. These include but are not limited to, transfer of assets overseas, the use of offshore companies in tax havens to secure assets, and the registration of assets in nominee names. In addition despite having some of the most profitable and well capitalized companies in Africa, the level of tax remittance is low.")
+            \n\n1. Manipulating accounting records by keeping two sets of books\
+            \n2. Many states have lacked the machinery to accurately track the true income of their residents.\
+            \n3. Use of complex structures in transactions to evade taxes.\
+            \n4. Non registration for VAT, or charging of VAT without remitting to FIRS.\
+            \n5. Non payment of Capital Gains Tax (CGT) on asset disposals.\
+            \nNigeria\'s low tax revenues are at variance with the lifestyles of a large number of its people \
+            and with the value of assets known to be owned by Nigerians resident around the world. \
+            There has been a systemic breakdown of compliance with the tax system with various strategies used \
+            to evade tax obligations. These include but are not limited to, transfer of assets overseas, the use\
+             of offshore companies in tax havens to secure assets, and the registration of assets in nominee names. \
+             In addition despite having some of the most profitable and well capitalized companies in Africa, the level of tax remittance is low.")
         }
         else if (results.response && results.response.entity =='Why is the FG implementing VAIDS now?'){
             session.send("There is currently a global initiative to tackle the problem of illicit financial flows and tax evasion,\
